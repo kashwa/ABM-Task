@@ -37,7 +37,18 @@ class abmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // alpha_dash doesn't allow spaces.
+        $request->validate([
+            'name' => 'required|max:255',
+            'age' => 'required|integer|min:0'            
+        ]);
+
+        $abm = new Abm();
+
+        $abm->name = $request['name'];
+        $abm->age = $request['age'];
+
+        $abm->save();
     }
 
     /**
